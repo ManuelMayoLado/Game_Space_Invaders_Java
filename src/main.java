@@ -498,6 +498,7 @@ public class main extends BasicGame {
 		descansoMarcianos0 = descansoMarcianosInicio;
 		direccionMarcianos = 0;
 		numMarcianosVivos = numMarcianos;
+		puntuacion = 0;
 		run = true;
 		gameOver = false;
 	}
