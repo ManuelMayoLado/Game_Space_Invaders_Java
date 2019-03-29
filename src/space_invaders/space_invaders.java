@@ -270,22 +270,34 @@ public class space_invaders extends BasicGame {
 		//debuxamos marcianos
 		
 		for (int i=0; i<arrayMarcianos.size(); i++) {
-			if (!arrayMarcianos.get(i).morto) {
+			if (arrayMarcianos.get(i).morrendo > 0) {
 				g.setColor(new Color(200,200,200));
-				if (numImagenMarciano == 1) {
-					spriteMarciano1.draw(
+				if (!arrayMarcianos.get(i).morto) {
+					if (numImagenMarciano == 1) {
+						spriteMarciano1.draw(
 							arrayMarcianos.get(i).punto.x-anchoMarciano/8,
 							arrayMarcianos.get(i).punto.y-altoMarciano/8,
 							arrayMarcianos.get(i).ancho+anchoMarciano/4,
 							arrayMarcianos.get(i).alto+altoMarciano/4);
-				}
-				else {
-					spriteMarciano2.draw(
+					}
+					else {
+						spriteMarciano2.draw(
 							arrayMarcianos.get(i).punto.x-anchoMarciano/8,
 							arrayMarcianos.get(i).punto.y-altoMarciano/8,
 							arrayMarcianos.get(i).ancho+anchoMarciano/4,
 							arrayMarcianos.get(i).alto+altoMarciano/4);
-				}
+					}
+				} else {
+					g.setColor(new Color(200,20,20));
+					float ancho_m = arrayMarcianos.get(i).ancho+anchoMarciano/4-(arrayMarcianos.get(i).morrendo*5);
+					float alto_m = arrayMarcianos.get(i).alto+altoMarciano/4-(arrayMarcianos.get(i).morrendo*5);
+					g.drawRect(
+						arrayMarcianos.get(i).punto.x-ancho_m/8,
+						arrayMarcianos.get(i).punto.y-alto_m/8,
+						ancho_m,
+						alto_m);
+					arrayMarcianos.get(i).morrendo -= 1;
+				}	
 				g.setColor(new Color(255,255,255));
 			}
 		}
