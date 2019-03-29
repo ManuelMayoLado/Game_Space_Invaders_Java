@@ -1,3 +1,4 @@
+package space_invaders;
 import java.util.ArrayList;
 
 import java.util.Random;
@@ -13,7 +14,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.Image;
 
 
-public class main extends BasicGame {
+public class space_invaders extends BasicGame {
 	
 	private boolean run = false;
 	
@@ -83,7 +84,7 @@ public class main extends BasicGame {
 	
 	private int numImagenMarciano = 1;
 	
-	//FUNCIÓNS
+	//FUNCIï¿½NS
 	
 	private void crearMarcianos() {
 		arrayMarcianos.clear();
@@ -188,12 +189,12 @@ public class main extends BasicGame {
 	
 	//////
 	
-	public main(String title) {
+	public space_invaders(String title) {
 		super(title);
 	}
 
-	public static void main(String args[]) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new main("Space Invaders"));
+	public static void main(final String args[]) throws SlickException {
+		AppGameContainer app = new AppGameContainer(new space_invaders("Space Invaders"));
 		app.setDisplayMode(anchoV, altoV, false);
 		app.setVSync(true);
 		app.setShowFPS(false);
@@ -213,7 +214,7 @@ public class main extends BasicGame {
 			gris += 1;
 		}
 
-		//debuxamos tanque (2 rectangulos: vehiculo + canón)
+		//debuxamos tanque (2 rectangulos: vehiculo + canï¿½n)
 		
 		if (pj.carga == cargaBala){
 			g.setColor(new Color(200, 200, 200));

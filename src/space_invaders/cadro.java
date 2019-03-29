@@ -1,3 +1,4 @@
+package space_invaders;
 
 public class cadro {
 	public punto punto;

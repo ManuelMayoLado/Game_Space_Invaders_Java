@@ -1,3 +1,4 @@
+package space_invaders;
 
 public class marciano {
 	public punto punto;

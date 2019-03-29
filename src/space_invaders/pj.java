@@ -1,3 +1,5 @@
+package space_invaders;
+
 public class pj {
 	public punto punto;
 	public float ancho;

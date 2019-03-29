@@ -1,3 +1,4 @@
+package space_invaders;
 
 public class bala {
 	public punto punto;
