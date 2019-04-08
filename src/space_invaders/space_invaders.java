@@ -214,7 +214,7 @@ public class space_invaders extends BasicGame {
 			gris += 1;
 		}
 
-		//debuxamos tanque (2 rectangulos: vehiculo + can�n)
+		//debuxamos tanque (2 rectangulos: vehiculo + cañón)
 		
 		if (pj.carga == cargaBala){
 			g.setColor(new Color(200, 200, 200));
@@ -270,8 +270,9 @@ public class space_invaders extends BasicGame {
 		//debuxamos marcianos
 		
 		for (int i=0; i<arrayMarcianos.size(); i++) {
-			if (arrayMarcianos.get(i).morrendo > 0) {
+			if (arrayMarcianos.get(i).morrendo > 0) { 
 				g.setColor(new Color(200,200,200));
+				//marcianos vivos
 				if (!arrayMarcianos.get(i).morto) {
 					if (numImagenMarciano == 1) {
 						spriteMarciano1.draw(
@@ -287,13 +288,14 @@ public class space_invaders extends BasicGame {
 							arrayMarcianos.get(i).ancho+anchoMarciano/4,
 							arrayMarcianos.get(i).alto+altoMarciano/4);
 					}
+				//marcianos explotando
 				} else {
 					g.setColor(new Color(200,20,20));
-					float ancho_m = arrayMarcianos.get(i).ancho+anchoMarciano/4-(arrayMarcianos.get(i).morrendo*5);
-					float alto_m = arrayMarcianos.get(i).alto+altoMarciano/4-(arrayMarcianos.get(i).morrendo*5);
-					g.drawRect(
-						arrayMarcianos.get(i).punto.x-ancho_m/8,
-						arrayMarcianos.get(i).punto.y-alto_m/8,
+					float ancho_m = arrayMarcianos.get(i).ancho-arrayMarcianos.get(i).morrendo*2;
+					float alto_m = arrayMarcianos.get(i).alto-arrayMarcianos.get(i).morrendo*2;
+					g.drawOval(
+						arrayMarcianos.get(i).punto.x+(arrayMarcianos.get(i).ancho-ancho_m)/2,
+						arrayMarcianos.get(i).punto.y+(arrayMarcianos.get(i).alto-alto_m)/2,
 						ancho_m,
 						alto_m);
 					arrayMarcianos.get(i).morrendo -= 1;
