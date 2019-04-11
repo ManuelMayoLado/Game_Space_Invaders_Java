@@ -30,27 +30,27 @@ public class space_invaders extends BasicGame {
 	private static float anchoCanon = 5;
 	private static float altoCanon = 10;
 	
-	private static float velocidadePj = 2.5f;
+	private static float velPj = 2.5f;
 	
 	private static int cargaBala = 50;
 	
 	private static int anchoCadro = 5;
 	private static int altoCadro = 5;
 	
-	private static float velocidadeBala = 8;
+	private static float velBala = 8;
 	
-	private static int numMarcianosFila = 10;
-	private static int numFilasMarcianos = 5;
-	private static int numMarcianos = numMarcianosFila * numFilasMarcianos;
+	private static int numMarFila = 10;
+	private static int numFilasMar = 5;
+	private static int numMarcianos = numMarFila * numFilasMar;
 	
 	private int numMarcianosVivos = numMarcianos;
 	
-	private float descansoMarcianosInicio = numMarcianos;
-	private float descansoMarcianos0 = descansoMarcianosInicio;
-	private float descansoMarcianos = descansoMarcianos0;
+	private float descansoMarInicio = numMarcianos;
+	private float descansoMar0 = descansoMarInicio;
+	private float descansoMar = descansoMar0;
 	
-	private static int anchoMarciano = 25;
-	private static int altoMarciano = 25;
+	private static int anchoMar = 25;
+	private static int altoMar = 25;
 	
 	private static int anchoBalaMarciano = 5;
 	private static int altoBalaMarciano = 5;
@@ -70,9 +70,9 @@ public class space_invaders extends BasicGame {
 	
 	private punto punto_pj = new punto(anchoV/2-anchoPj/2,altoV-altoPj);
 	
-	private pj pj = new pj(punto_pj,anchoPj,altoPj,anchoCanon,altoCanon,velocidadePj,cargaBala);
+	private pj pj = new pj(punto_pj,anchoPj,altoPj,anchoCanon,altoCanon,velPj,cargaBala);
 	
-	private ArrayList<marciano> arrayMarcianos= new ArrayList <marciano> ();
+	private ArrayList<marciano> arrayMar= new ArrayList <marciano> ();
 	
 	private ArrayList<bala> arrayBalas= new ArrayList <bala> ();
 	private ArrayList<bala> arrayBalasMarcianos= new ArrayList <bala> ();
@@ -87,21 +87,21 @@ public class space_invaders extends BasicGame {
 	//FUNCI�NS
 	
 	private void crearMarcianos() {
-		arrayMarcianos.clear();
-		for (int u=0; u<numFilasMarcianos; u++){
+		arrayMar.clear();
+		for (int u=0; u<numFilasMar; u++){
 			boolean abaixo;
-			if (u==numFilasMarcianos-1) {
+			if (u==numFilasMar-1) {
 				abaixo = true;
 			} else {
 				abaixo = false;
 			}
-			for (int i=0; i<numMarcianosFila; i++){
-				arrayMarcianos.add(new marciano(
+			for (int i=0; i<numMarFila; i++){
+				arrayMar.add(new marciano(
 					new punto(
-						anchoV/(numMarcianosFila+2)*i+(anchoV-(anchoV/(numMarcianosFila+2)*numMarcianosFila))/2,
-						u*(anchoMarciano*2)+anchoMarciano*3),
-					anchoMarciano, 
-					altoMarciano,
+						anchoV/(numMarFila+2)*i+(anchoV-(anchoV/(numMarFila+2)*numMarFila))/2,
+						u*(anchoMar*2)+anchoMar*3),
+					anchoMar, 
+					altoMar,
 					abaixo,
 					false));
 			}
@@ -128,7 +128,8 @@ public class space_invaders extends BasicGame {
 				if (i%2==0) {
 					pos_x = anchoV/16-anchoCadro/4+tamanhoBunquer*i;
 				} else {
-					pos_x = anchoV/16-anchoCadro/4+tamanhoBunquer*i-(anchoCadro*(ancho_columna-1));
+					pos_x = anchoV/16-anchoCadro/4+tamanhoBunquer*i-
+							(anchoCadro*(ancho_columna-1));
 				}
 				
 				for (int x=0;x<ancho_columna;x++) {
@@ -174,15 +175,15 @@ public class space_invaders extends BasicGame {
 		xMenor = anchoV;
 		xMaior = 0;
 		yMaior = 0;
-		for (int i=0; i<arrayMarcianos.size(); i++) {
-			if (!arrayMarcianos.get(i).morto && arrayMarcianos.get(i).punto.x < xMenor) {
-				xMenor = arrayMarcianos.get(i).punto.x;
+		for (int i=0; i<arrayMar.size(); i++) {
+			if (!arrayMar.get(i).morto && arrayMar.get(i).punto.x < xMenor) {
+				xMenor = arrayMar.get(i).punto.x;
 			}
-			if (!arrayMarcianos.get(i).morto && arrayMarcianos.get(i).punto.x > xMaior) {
-				xMaior = arrayMarcianos.get(i).punto.x;
+			if (!arrayMar.get(i).morto && arrayMar.get(i).punto.x > xMaior) {
+				xMaior = arrayMar.get(i).punto.x;
 			}
-			if (!arrayMarcianos.get(i).morto && arrayMarcianos.get(i).punto.y > yMaior) {
-				yMaior = arrayMarcianos.get(i).punto.y;
+			if (!arrayMar.get(i).morto && arrayMar.get(i).punto.y > yMaior) {
+				yMaior = arrayMar.get(i).punto.y;
 			}
 		}
 	}
@@ -229,7 +230,8 @@ public class space_invaders extends BasicGame {
 		
 		g.fillRect(pj.punto.x+pj.ancho/8,pj.punto.y,pj.ancho-pj.ancho/4,pj.alto/2);
 		g.fillRect(pj.punto.x,pj.punto.y+pj.alto/2,pj.ancho,pj.alto/2);
-		g.fillRect(pj.punto.x+pj.ancho/2-pj.anchoCanon/2, pj.punto.y-pj.altoCanon, pj.anchoCanon, pj.altoCanon);
+		g.fillRect(pj.punto.x+pj.ancho/2-pj.anchoCanon/2, pj.punto.y-pj.altoCanon, 
+				pj.anchoCanon, pj.altoCanon);
 		
 		//debuxamos balas
 		
@@ -258,7 +260,8 @@ public class space_invaders extends BasicGame {
 		float color_restar = 0;
 		
 		for (int i=0; i<arrayCadros.size(); i++) {
-			g.setColor(new Color(100-(int)color_restar, 80-(int)color_restar, 60-(int)color_restar));
+			g.setColor(new Color(100-(int)color_restar, 80-(int)color_restar, 
+					60-(int)color_restar));
 			g.fillRect(
 					arrayCadros.get(i).punto.x, 
 					arrayCadros.get(i).punto.y, 
@@ -269,36 +272,36 @@ public class space_invaders extends BasicGame {
 		
 		//debuxamos marcianos
 		
-		for (int i=0; i<arrayMarcianos.size(); i++) {
-			if (arrayMarcianos.get(i).morrendo > 0) { 
+		for (int i=0; i<arrayMar.size(); i++) {
+			if (arrayMar.get(i).morrendo > 0) { 
 				g.setColor(new Color(200,200,200));
 				//marcianos vivos
-				if (!arrayMarcianos.get(i).morto) {
+				if (!arrayMar.get(i).morto) {
 					if (numImagenMarciano == 1) {
 						spriteMarciano1.draw(
-							arrayMarcianos.get(i).punto.x-anchoMarciano/8,
-							arrayMarcianos.get(i).punto.y-altoMarciano/8,
-							arrayMarcianos.get(i).ancho+anchoMarciano/4,
-							arrayMarcianos.get(i).alto+altoMarciano/4);
+							arrayMar.get(i).punto.x-anchoMar/8,
+							arrayMar.get(i).punto.y-altoMar/8,
+							arrayMar.get(i).ancho+anchoMar/4,
+							arrayMar.get(i).alto+altoMar/4);
 					}
 					else {
 						spriteMarciano2.draw(
-							arrayMarcianos.get(i).punto.x-anchoMarciano/8,
-							arrayMarcianos.get(i).punto.y-altoMarciano/8,
-							arrayMarcianos.get(i).ancho+anchoMarciano/4,
-							arrayMarcianos.get(i).alto+altoMarciano/4);
+							arrayMar.get(i).punto.x-anchoMar/8,
+							arrayMar.get(i).punto.y-altoMar/8,
+							arrayMar.get(i).ancho+anchoMar/4,
+							arrayMar.get(i).alto+altoMar/4);
 					}
 				//marcianos explotando
 				} else {
 					g.setColor(new Color(200,20,20));
-					float ancho_m = arrayMarcianos.get(i).ancho-arrayMarcianos.get(i).morrendo*2;
-					float alto_m = arrayMarcianos.get(i).alto-arrayMarcianos.get(i).morrendo*2;
+					float ancho_m = arrayMar.get(i).ancho-arrayMar.get(i).morrendo*2;
+					float alto_m = arrayMar.get(i).alto-arrayMar.get(i).morrendo*2;
 					g.drawOval(
-						arrayMarcianos.get(i).punto.x+(arrayMarcianos.get(i).ancho-ancho_m)/2,
-						arrayMarcianos.get(i).punto.y+(arrayMarcianos.get(i).alto-alto_m)/2,
+						arrayMar.get(i).punto.x+(arrayMar.get(i).ancho-ancho_m)/2,
+						arrayMar.get(i).punto.y+(arrayMar.get(i).alto-alto_m)/2,
 						ancho_m,
 						alto_m);
-					arrayMarcianos.get(i).morrendo -= 1;
+					arrayMar.get(i).morrendo -= 1;
 				}	
 				g.setColor(new Color(255,255,255));
 			}
@@ -357,7 +360,7 @@ public class space_invaders extends BasicGame {
 									pj.punto.y-pj.altoCanon),
 							pj.anchoCanon,
 							pj.altoCanon, 
-							velocidadeBala));
+							velBala));
 			pj.carga = 0;
 			
 		}
@@ -407,22 +410,23 @@ public class space_invaders extends BasicGame {
 		//disparo marcianos
 		
 		if (!gameOver) {
-			for (int i=0; i<arrayMarcianos.size(); i++) {
-				if (arrayMarcianos.get(i).abaixo && arrayMarcianos.get(i).recarga == 0) {
+			for (int i=0; i<arrayMar.size(); i++) {
+				if (arrayMar.get(i).abaixo && arrayMar.get(i).recarga == 0) {
 					Random rand = new Random ();
-					if (rand.nextInt((1000)) >  990 && !arrayMarcianos.get(i).morto && arrayBalasMarcianos.size() < 4) {
+					if (rand.nextInt((1000)) >  990 && !arrayMar.get(i).morto && 
+							arrayBalasMarcianos.size() < 4) {
 						arrayBalasMarcianos.add(new bala(
-												new punto(
-														arrayMarcianos.get(i).punto.x+anchoMarciano/2-anchoBalaMarciano/2,
-														arrayMarcianos.get(i).punto.y+altoMarciano), 
-												anchoBalaMarciano,
-												altoBalaMarciano, 
-												velocidadeBalaMarciano));
-						arrayMarcianos.get(i).recarga = 120;
+							new punto(
+								arrayMar.get(i).punto.x+anchoMar/2-anchoBalaMarciano/2,
+								arrayMar.get(i).punto.y+altoMar), 
+							anchoBalaMarciano,
+							altoBalaMarciano, 
+							velocidadeBalaMarciano));
+						arrayMar.get(i).recarga = 120;
 					}
 				}
-				if (arrayMarcianos.get(i).recarga > 0) {
-					arrayMarcianos.get(i).recarga -= 1;
+				if (arrayMar.get(i).recarga > 0) {
+					arrayMar.get(i).recarga -= 1;
 				}
 			}
 		}
@@ -431,11 +435,11 @@ public class space_invaders extends BasicGame {
 		
 			//movemento horizontal
 		
-		if (yMaior > altoV - altoMarciano*4) {
+		if (yMaior > altoV - altoMar*4) {
 			gameOver = true;
 		}
 		
-		if (descansoMarcianos == 0) {
+		if (descansoMar == 0) {
 			movHorizontal = true;
 		}
 		else {
@@ -444,21 +448,21 @@ public class space_invaders extends BasicGame {
 		
 		if (!movVertical && movHorizontal && !gameOver) {
 			
-			for (int i=0; i<arrayMarcianos.size(); i++) {
+			for (int i=0; i<arrayMar.size(); i++) {
 					
 				if (direccionMarcianos == 0) {
-					arrayMarcianos.get(i).punto.x -= velocidadeMarciano;
+					arrayMar.get(i).punto.x -= velocidadeMarciano;
 				}
 				if (direccionMarcianos == 1) {
-					arrayMarcianos.get(i).punto.x += velocidadeMarciano;
+					arrayMar.get(i).punto.x += velocidadeMarciano;
 				}
 					
-				if (arrayMarcianos.get(i).punto.x < 0) {
-					arrayMarcianos.get(i).punto.x = 0;
+				if (arrayMar.get(i).punto.x < 0) {
+					arrayMar.get(i).punto.x = 0;
 				}
 					
-				if (arrayMarcianos.get(i).punto.x > anchoV-anchoMarciano) {
-					arrayMarcianos.get(i).punto.x = anchoV-anchoMarciano;
+				if (arrayMar.get(i).punto.x > anchoV-anchoMar) {
+					arrayMar.get(i).punto.x = anchoV-anchoMar;
 				}
 					
 			}
@@ -471,34 +475,34 @@ public class space_invaders extends BasicGame {
 			}
 		}
 		
-		if (descansoMarcianos > 0) {
-			descansoMarcianos -= 1;
-			if (descansoMarcianos <= 0) {
-				descansoMarcianos = 0;
+		if (descansoMar > 0) {
+			descansoMar -= 1;
+			if (descansoMar <= 0) {
+				descansoMar = 0;
 			}
 		}
 		else {
-			descansoMarcianos = descansoMarcianos0;
+			descansoMar = descansoMar0;
 		}
 		
 			//movemento vertical
 		
 		Posicions();
 		
-		if (descansoMarcianos == 0) {
+		if (descansoMar == 0) {
 			
 			if (xMenor == 0 && !movVertical && direccionMarcianos == 0) {
 				movVertical = true;
 			}
 			
-			if (xMaior == anchoV-anchoMarciano && !movVertical && direccionMarcianos == 1) {
+			if (xMaior == anchoV-anchoMar && !movVertical && direccionMarcianos == 1) {
 				movVertical = true;
 			}
 		}
 		
-		if (movVertical && descansoMarcianos == 0 && !gameOver) {
-			for (int i=0; i<arrayMarcianos.size(); i++) {
-				arrayMarcianos.get(i).punto.y += altoMarciano;
+		if (movVertical && descansoMar == 0 && !gameOver) {
+			for (int i=0; i<arrayMar.size(); i++) {
+				arrayMar.get(i).punto.y += altoMar;
 				if (xMenor == 0) {
 					direccionMarcianos = 1;
 				}
@@ -506,7 +510,7 @@ public class space_invaders extends BasicGame {
 					direccionMarcianos = 0;
 				}
 			movVertical = false;
-			descansoMarcianos = descansoMarcianos0;
+			descansoMar = descansoMar0;
 			}
 			
 		}
@@ -515,36 +519,37 @@ public class space_invaders extends BasicGame {
 		
 		for (int i=0; i<arrayBalas.size(); i++) {
 			
-			for (int u=0; u<arrayMarcianos.size(); u++) {
-				if (!arrayMarcianos.get(u).morto) {
+			for (int u=0; u<arrayMar.size(); u++) {
+				if (!arrayMar.get(u).morto) {
 					Rectangle rectanguloMarciano = new Rectangle(
-											arrayMarcianos.get(u).punto.x, 
-											arrayMarcianos.get(u).punto.y, 
-											arrayMarcianos.get(u).ancho,
-											arrayMarcianos.get(u).alto);
+											arrayMar.get(u).punto.x, 
+											arrayMar.get(u).punto.y, 
+											arrayMar.get(u).ancho,
+											arrayMar.get(u).alto);
 					Rectangle rectanguloBala = new Rectangle(
 											arrayBalas.get(i).punto.x, 
 											arrayBalas.get(i).punto.y, 
 											arrayBalas.get(i).ancho, 
 											arrayBalas.get(i).alto);
 					if (rectanguloBala.intersects(rectanguloMarciano)) {
-						arrayMarcianos.get(u).morto = true;
-						if (arrayMarcianos.get(u).abaixo) {
-							arrayMarcianos.get(u).abaixo = false;
-							if (u-numMarcianosFila >= 0) {
-								arrayMarcianos.get(u-numMarcianosFila).abaixo = true;
+						arrayMar.get(u).morto = true;
+						if (arrayMar.get(u).abaixo) {
+							arrayMar.get(u).abaixo = false;
+							if (u-numMarFila >= 0) {
+								arrayMar.get(u-numMarFila).abaixo = true;
 							}
 						}
 						arrayBalas.remove(i);
 						pj.carga += cargaBala/2;
 						numMarcianosVivos -= 1;
 						puntuacion += 100;
-						descansoMarcianos0 = descansoMarcianosInicio - (numMarcianos-numMarcianosVivos);
+						descansoMar0 = descansoMarInicio - 
+								(numMarcianos-numMarcianosVivos);
 						if (numMarcianosVivos == 1) {
-							descansoMarcianos0 = 0;
+							descansoMar0 = 0;
 						}
-						if (descansoMarcianos0 < 0) {
-							descansoMarcianos0 = 0;
+						if (descansoMar0 < 0) {
+							descansoMar0 = 0;
 						}
 						break;
 					}
@@ -629,7 +634,7 @@ public class space_invaders extends BasicGame {
 		Posicions();
 		arrayBalas.clear();
 		arrayBalasMarcianos.clear();
-		descansoMarcianos0 = descansoMarcianosInicio;
+		descansoMar0 = descansoMarInicio;
 		direccionMarcianos = 0;
 		numMarcianosVivos = numMarcianos;
 		puntuacion = 0;
