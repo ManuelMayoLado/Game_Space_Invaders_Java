@@ -1,4 +1,4 @@
-package space_invaders;
+
 
 public class punto {
 	public float x;

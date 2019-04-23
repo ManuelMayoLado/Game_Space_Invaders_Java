@@ -1,4 +1,4 @@
-package space_invaders;
+
 import java.util.ArrayList;
 
 import java.util.Random;
