@@ -1,5 +1,3 @@
-
-
 public class marciano {
 	public punto punto;
 	public float ancho;

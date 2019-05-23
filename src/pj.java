@@ -1,5 +1,3 @@
-
-
 public class pj {
 	public punto punto;
 	public float ancho;

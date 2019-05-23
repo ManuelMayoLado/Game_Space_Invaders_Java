@@ -1,5 +1,3 @@
-
-
 public class cadro {
 	public punto punto;
 	public float ancho;

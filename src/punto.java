@@ -1,5 +1,3 @@
-
-
 public class punto {
 	public float x;
 	public float y;

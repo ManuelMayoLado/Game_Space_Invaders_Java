@@ -1,5 +1,3 @@
-
-
 public class bala {
 	public punto punto;
 	public float ancho;
