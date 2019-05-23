@@ -1,8 +1,8 @@
-public class punto {
+public class Punto {
 	public float x;
 	public float y;
 	
-	public punto(float x,float y) {
+	public Punto(float x,float y) {
 		this.x = x;
 		this.y = y;
 	}

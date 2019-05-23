@@ -13,7 +13,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.Image;
 
 
-public class space_invaders extends BasicGame {
+public class SpaceInvaders extends BasicGame {
 	
 	private boolean run = false;
 	
@@ -67,16 +67,16 @@ public class space_invaders extends BasicGame {
 	private int puntuacion = 0;
 	private boolean gameOver = false;
 	
-	private punto punto_pj = new punto(anchoV/2-anchoPj/2,altoV-altoPj);
+	private Punto punto_pj = new Punto(anchoV/2-anchoPj/2,altoV-altoPj);
 	
-	private pj pj = new pj(punto_pj,anchoPj,altoPj,anchoCanon,altoCanon,velPj,cargaBala);
+	private Pj pj = new Pj(punto_pj,anchoPj,altoPj,anchoCanon,altoCanon,velPj,cargaBala);
 	
-	private ArrayList<marciano> arrayMar= new ArrayList <marciano> ();
+	private ArrayList<Marciano> arrayMar= new ArrayList <Marciano> ();
 	
-	private ArrayList<bala> arrayBalas= new ArrayList <bala> ();
-	private ArrayList<bala> arrayBalasMarcianos= new ArrayList <bala> ();
+	private ArrayList<Bala> arrayBalas= new ArrayList <Bala> ();
+	private ArrayList<Bala> arrayBalasMarcianos= new ArrayList <Bala> ();
 	
-	private ArrayList<cadro> arrayCadros = new ArrayList <cadro> ();
+	private ArrayList<Cadro> arrayCadros = new ArrayList <Cadro> ();
 	
 	private Image spriteMarciano1;
 	private Image spriteMarciano2;
@@ -95,8 +95,8 @@ public class space_invaders extends BasicGame {
 				abaixo = false;
 			}
 			for (int i=0; i<numMarFila; i++){
-				arrayMar.add(new marciano(
-					new punto(
+				arrayMar.add(new Marciano(
+					new Punto(
 						anchoV/(numMarFila+2)*i+(anchoV-(anchoV/(numMarFila+2)*numMarFila))/2,
 						u*(anchoMar*2)+anchoMar*3),
 					anchoMar, 
@@ -133,7 +133,7 @@ public class space_invaders extends BasicGame {
 				
 				for (int x=0;x<ancho_columna;x++) {
 					
-					arrayCadros.add(new cadro(new punto(
+					arrayCadros.add(new Cadro(new Punto(
 							pos_x+anchoCadro*x,
 							(altoV-altoV/8)-y*altoCadro), 
 							anchoCadro, 
@@ -149,20 +149,20 @@ public class space_invaders extends BasicGame {
 			
 			for (int i=anchoV/16-anchoCadro/4; i<tamanhoBunquer+anchoV/16; i += anchoCadro) {
 				
-				arrayCadros.add(new cadro(
-									new punto(i,(altoV-altoV/8)-altoCadro*u), 
+				arrayCadros.add(new Cadro(
+									new Punto(i,(altoV-altoV/8)-altoCadro*u), 
 									anchoCadro, 
 									altoCadro));
-				arrayCadros.add(new cadro(
-									new punto(i+anchoV/4,(altoV-altoV/8)-altoCadro*u), 
+				arrayCadros.add(new Cadro(
+									new Punto(i+anchoV/4,(altoV-altoV/8)-altoCadro*u), 
 									anchoCadro, 
 									altoCadro));
-				arrayCadros.add(new cadro(
-									new punto(i+(anchoV/4)*2,(altoV-altoV/8)-altoCadro*u), 
+				arrayCadros.add(new Cadro(
+									new Punto(i+(anchoV/4)*2,(altoV-altoV/8)-altoCadro*u), 
 									anchoCadro, 
 									altoCadro));
-				arrayCadros.add(new cadro(
-									new punto(i+(anchoV/4)*3,(altoV-altoV/8)-altoCadro*u), 
+				arrayCadros.add(new Cadro(
+									new Punto(i+(anchoV/4)*3,(altoV-altoV/8)-altoCadro*u), 
 									anchoCadro, 
 									altoCadro));
 				
@@ -189,12 +189,12 @@ public class space_invaders extends BasicGame {
 	
 	//////
 	
-	public space_invaders(String title) {
+	public SpaceInvaders(String title) {
 		super(title);
 	}
 
 	public static void main(final String args[]) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new space_invaders("Space Invaders"));
+		AppGameContainer app = new AppGameContainer(new SpaceInvaders("Space Invaders"));
 		app.setDisplayMode(anchoV, altoV, false);
 		app.setVSync(true);
 		app.setShowFPS(false);
@@ -292,7 +292,7 @@ public class space_invaders extends BasicGame {
 					}
 				//marcianos explotando
 				} else {
-					g.setColor(new Color(200,20,20));
+					g.setColor(new Color(60,220,60));
 					float ancho_m = arrayMar.get(i).ancho-arrayMar.get(i).morrendo*2;
 					float alto_m = arrayMar.get(i).alto-arrayMar.get(i).morrendo*2;
 					g.drawOval(
@@ -353,8 +353,8 @@ public class space_invaders extends BasicGame {
 		}
 		
 		if (input.isKeyDown(Input.KEY_SPACE) && pj.carga == cargaBala && !gameOver) {
-			arrayBalas.add(new bala(
-							new punto(
+			arrayBalas.add(new Bala(
+							new Punto(
 									pj.punto.x+pj.ancho/2-pj.anchoCanon/2,
 									pj.punto.y-pj.altoCanon),
 							pj.anchoCanon,
@@ -414,8 +414,8 @@ public class space_invaders extends BasicGame {
 					Random rand = new Random ();
 					if (rand.nextInt((1000)) >  990 && !arrayMar.get(i).morto && 
 							arrayBalasMarcianos.size() < 4) {
-						arrayBalasMarcianos.add(new bala(
-							new punto(
+						arrayBalasMarcianos.add(new Bala(
+							new Punto(
 								arrayMar.get(i).punto.x+anchoMar/2-anchoBalaMarciano/2,
 								arrayMar.get(i).punto.y+altoMar), 
 							anchoBalaMarciano,

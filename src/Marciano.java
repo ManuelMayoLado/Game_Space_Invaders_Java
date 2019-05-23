@@ -1,5 +1,5 @@
-public class marciano {
-	public punto punto;
+public class Marciano {
+	public Punto punto;
 	public float ancho;
 	public float alto;
 	public float recarga;
@@ -7,7 +7,7 @@ public class marciano {
 	public boolean morto;
 	public float morrendo;
 	
-	public marciano(punto punto,float ancho,float alto,boolean abaixo,boolean morto) {
+	public Marciano(Punto punto,float ancho,float alto,boolean abaixo,boolean morto) {
 		this.punto = punto;
 		this.ancho = ancho;
 		this.alto = alto;
